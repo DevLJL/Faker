@@ -11,7 +11,7 @@ type
     class function FemaleName: String;
     class function PersonName: String;
     class function LoremIpsum(ASize: Integer = 0): String;
-
+    class function Brand: String;
   end;
 
 const
@@ -370,6 +370,57 @@ const
       'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' +
       'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
+  _BRAND: TArray<String> = [
+    'Adidas',
+    'Apple',
+    'Budweiser',
+    'Calvin Klein',
+    'Coca-Cola',
+    'Colgate',
+    'Dell',
+    'Dove',
+    'Ferrari',
+    'Ford',
+    'Gucci',
+    'H&M',
+    'Heineken',
+    'Honda',
+    'IKEA',
+    'Kelloggs',
+    'KFC',
+    'Lacoste',
+    'Levis',
+    'Lipton',
+    'Louis Vuitton',
+    'McDonalds',
+    'Mercedes-Benz',
+    'Microsoft',
+    'Nestlé',
+    'Nike',
+    'Nivea',
+    'Pepsi',
+    'Philips',
+    'Puma',
+    'Ray-Ban',
+    'Red Bull',
+    'Samsung',
+    'Sony',
+    'Starbucks',
+    'Subway',
+    'Tesla',
+    'Tommy Hilfiger',
+    'Toyota',
+    'Uber',
+    'Vans',
+    'Versace',
+    'Volkswagen',
+    'Walmart',
+    'Whirlpool',
+    'Xerox',
+    'Zara',
+    'Zippo'
+  ];
+
 implementation
 
 uses
@@ -377,11 +428,14 @@ uses
 
 { TFaker }
 
+class function TFaker.Brand: String;
+begin
+  Result := _BRAND[Random(High(_BRAND))];
+end;
+
 class function TFaker.FemaleName: String;
 begin
-  Result :=_FEMALE_NAME[
-    Random(High(_FEMALE_NAME))
-  ];
+  Result := _FEMALE_NAME[Random(High(_FEMALE_NAME))];
 end;
 
 class function TFaker.LoremIpsum(ASize: Integer = 0): String;
@@ -400,9 +454,7 @@ end;
 
 class function TFaker.MaleName: String;
 begin
-  Result :=_MALE_NAME[
-    Random(High(_MALE_NAME))
-  ];
+  Result := _MALE_NAME[Random(High(_MALE_NAME))];
 end;
 
 class function TFaker.PersonName: String;
@@ -415,9 +467,7 @@ end;
 
 class function TFaker.Product: String;
 begin
-  Result :=_PRODUCT[
-    Random(High(_PRODUCT))
-  ];
+  Result := _PRODUCT[Random(High(_PRODUCT))];
 end;
 
 end.
