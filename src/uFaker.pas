@@ -6,6 +6,7 @@ type
   TFaker = class
   private
   public
+    class function Category: String;
     class function Product: String;
     class function MaleName: String;
     class function FemaleName: String;
@@ -15,6 +16,57 @@ type
   end;
 
 const
+  _CATEGORY: TArray<String> = [
+    'Acampamento',
+    'Artesanato',
+    'Automóveis',
+    'Bebês',
+    'Beleza',
+    'Brinquedos',
+    'Calçados',
+    'Câmeras',
+    'Casa e jardim',
+    'Celulares',
+    'Cervejas',
+    'Ciclismo',
+    'Computadores',
+    'Confeitaria',
+    'Cosméticos',
+    'Culinária',
+    'Decoração',
+    'Eletrodomésticos',
+    'Eletrônicos',
+    'Esportes',
+    'Ferramentas',
+    'Filmes',
+    'Fotografia',
+    'Gatos',
+    'Ginástica',
+    'Golfe',
+    'Higiene pessoal',
+    'Informática',
+    'Jardinagem',
+    'Jogos',
+    'Livros',
+    'Maquiagem',
+    'Materiais escolares',
+    'Móveis',
+    'Música',
+    'Óculos',
+    'Papelaria',
+    'Perfumes',
+    'Pet shop',
+    'Roupas',
+    'Saúde',
+    'Sex shop',
+    'Skate',
+    'Surf',
+    'Tênis',
+    'Viagem',
+    'Vinhos',
+    'Yoga'
+  ];
+
   _PRODUCT: TArray<String> = [
     'Arroz',
     'Azeite',
@@ -431,6 +483,11 @@ uses
 class function TFaker.Brand: String;
 begin
   Result := _BRAND[Random(High(_BRAND))];
+end;
+
+class function TFaker.Category: String;
+begin
+  Result := _CATEGORY[Random(High(_CATEGORY))];
 end;
 
 class function TFaker.FemaleName: String;
