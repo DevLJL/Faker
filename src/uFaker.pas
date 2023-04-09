@@ -978,37 +978,44 @@ uses
 
 class function TFaker.&Unit: String;
 begin
-  Result := _UNIT[Random(High(_UNIT))];
+  Randomize;
+  Result := _UNIT[Random(Length(_UNIT))];
 end;
 
 class function TFaker.Brand: String;
 begin
-  Result := _BRAND[Random(High(_BRAND))];
+  Randomize;
+  Result := _BRAND[Random(Length(_BRAND))];
 end;
 
 class function TFaker.Category: String;
 begin
-  Result := _CATEGORY[Random(High(_CATEGORY))];
+  Randomize;
+  Result := _CATEGORY[Random(Length(_CATEGORY))];
 end;
 
 class function TFaker.City: String;
 begin
-  Result := _CITY[Random(High(_CITY))];
+  Randomize;
+  Result := _CITY[Random(Length(_CITY))];
 end;
 
 class function TFaker.CostCenter: String;
 begin
-  Result := _COST_CENTER[Random(High(_COST_CENTER))];
+  Randomize;
+  Result := _COST_CENTER[Random(Length(_COST_CENTER))];
 end;
 
 class function TFaker.Country: String;
 begin
-  Result := _COUNTRY[Random(High(_COUNTRY))];
+  Randomize;
+  Result := _COUNTRY[Random(Length(_COUNTRY))];
 end;
 
 class function TFaker.FemaleName: String;
 begin
-  Result := _FEMALE_NAME[Random(High(_FEMALE_NAME))];
+  Randomize;
+  Result := _FEMALE_NAME[Random(Length(_FEMALE_NAME))];
 end;
 
 class function TFaker.GenerateUUID: String;
@@ -1018,18 +1025,20 @@ var
   lI: Integer;
 begin
   Result := TGUID.NewGuid.ToString;
-  for lI := 0 to High(L_CHARS_TO_REMOVE) do
+  for lI := 0 to Length(L_CHARS_TO_REMOVE) do
     Result := StringReplace(Result, L_CHARS_TO_REMOVE[lI], '', [rfReplaceAll]);
 end;
 
 class function TFaker.IbgeCodeCity: String;
 begin
-  Result := _IBGE_CODE_CITY[Random(High(_IBGE_CODE_CITY))];
+  Randomize;
+  Result := _IBGE_CODE_CITY[Random(Length(_IBGE_CODE_CITY))];
 end;
 
 class function TFaker.IbgeCodeCountry: String;
 begin
-  Result := _IBGE_CODE_COUNTRY[Random(High(_IBGE_CODE_COUNTRY))];
+  Randomize;
+  Result := _IBGE_CODE_COUNTRY[Random(Length(_IBGE_CODE_COUNTRY))];
 end;
 
 class function TFaker.LoremIpsum(ASize: Integer = 0): String;
@@ -1048,11 +1057,13 @@ end;
 
 class function TFaker.MaleName: String;
 begin
-  Result := _MALE_NAME[Random(High(_MALE_NAME))];
+  Randomize;
+  Result := _MALE_NAME[Random(Length(_MALE_NAME))];
 end;
 
 class function TFaker.PersonName: String;
 begin
+  Randomize;
   case Random(2) of
     0: Result := Self.MaleName;
     1: Result := Self.FemaleName;
@@ -1061,17 +1072,20 @@ end;
 
 class function TFaker.Product: String;
 begin
-  Result := _PRODUCT[Random(High(_PRODUCT))];
+  Randomize;
+  Result := _PRODUCT[Random(Length(_PRODUCT))];
 end;
 
 class function TFaker.Size: String;
 begin
-  Result := _SIZE[Random(High(_SIZE))];
+  Randomize;
+  Result := _SIZE[Random(Length(_SIZE))];
 end;
 
 class function TFaker.State: String;
 begin
-  Result := _STATE[Random(High(_STATE))];
+  Randomize;
+  Result := _STATE[Random(Length(_STATE))];
 end;
 
 end.
