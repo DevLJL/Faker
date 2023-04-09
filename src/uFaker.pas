@@ -6,6 +6,9 @@ type
   TFaker = class
   private
   public
+    class function Email: String;
+    class function GenerateCNPJ: string;
+    class function GenerateCPF: string;
     class function IbgeCodeCountry: String;
     class function IbgeCodeCity: String;
     class function Country: String;
@@ -22,9 +25,63 @@ type
     class function PersonName: String;
     class function LoremIpsum(ASize: Integer = 0): String;
     class function Brand: String;
+    class function RandVal(AArray: array of String): string;
   end;
 
 const
+  _EMAIL: TArray<String> = [
+    'maria@gmail.com',
+    'joao@hotmail.com',
+    'carla@yahoo.com',
+    'antonio@outlook.com',
+    'julia@protonmail.com',
+    'lucas@aol.com',
+    'renata@icloud.com',
+    'andre@live.com',
+    'fernanda@yandex.com',
+    'pedro@zoho.com',
+    'claudia@mail.com',
+    'gustavo@inbox.com',
+    'ana@fastmail.com',
+    'felipe@rocketmail.com',
+    'isabela@tutanota.com',
+    'thiago@naver.com',
+    'larissa@hushmail.com',
+    'marcos@runbox.com',
+    'tatiana@tuta.io',
+    'felix@libero.it',
+    'gabriela@mail.ru',
+    'luiz@gmx.com',
+    'valeria@yopmail.com',
+    'leonardo@zohomail.com',
+    'natasha@me.com',
+    'rafael@att.net',
+    'beatriz@swbell.net',
+    'jorge@optonline.net',
+    'monica@cox.net',
+    'samuel@sbcglobal.net',
+    'marina@earthlink.net',
+    'carlos@verizon.net',
+    'leticia@rogers.com',
+    'ivan@telus.net',
+    'laura@sympatico.ca',
+    'caroline@shaw.ca',
+    'tiago@bell.net',
+    'alessandra@cogeco.ca',
+    'diego@videotron.ca',
+    'bruna@icloud.com',
+    'sergio@live.com.pt',
+    'marcela@sapo.pt',
+    'jonas@outlook.pt',
+    'raquel@netcabo.pt',
+    'nuno@iol.pt',
+    'sofia@gmail.com.pt',
+    'filipe@hotmail.com.pt',
+    'andreia@msn.com.pt',
+    'helena@live.com.pt',
+    'bruno@yahoo.com.pt'
+  ];
+
   _IBGE_CODE_COUNTRY: TArray<String> = [
     '132',
     '7560',
@@ -978,45 +1035,109 @@ uses
 
 class function TFaker.&Unit: String;
 begin
-  Randomize;
-  Result := _UNIT[Random(Length(_UNIT))];
+  Result := RandVal(_UNIT);
 end;
 
 class function TFaker.Brand: String;
 begin
-  Randomize;
-  Result := _BRAND[Random(Length(_BRAND))];
+  Result := RandVal(_BRAND);
 end;
 
 class function TFaker.Category: String;
 begin
-  Randomize;
-  Result := _CATEGORY[Random(Length(_CATEGORY))];
+  Result := RandVal(_CATEGORY);
 end;
 
 class function TFaker.City: String;
 begin
-  Randomize;
-  Result := _CITY[Random(Length(_CITY))];
+  Result := RandVal(_CITY);
 end;
 
 class function TFaker.CostCenter: String;
 begin
-  Randomize;
-  Result := _COST_CENTER[Random(Length(_COST_CENTER))];
+  Result := RandVal(_COST_CENTER);
 end;
 
 class function TFaker.Country: String;
 begin
-  Randomize;
-  Result := _COUNTRY[Random(Length(_COUNTRY))];
+  Result := RandVal(_COUNTRY);
+end;
+
+class function TFaker.Email: String;
+begin
+  Result := RandVal(_EMAIL);
 end;
 
 class function TFaker.FemaleName: String;
 begin
-  Randomize;
-  Result := _FEMALE_NAME[Random(Length(_FEMALE_NAME))];
+  Result := RandVal(_FEMALE_NAME);
 end;
+
+class function TFaker.GenerateCNPJ: string;
+var
+  digito1, digito2: Integer;
+  i, soma, peso: Integer;
+  cnpj: string;
+begin
+  Randomize;
+  cnpj := '';
+  for i := 1 to 12 do
+    cnpj := cnpj + IntToStr(Random(9));
+  soma := 0;
+  peso := 5;
+  for i := 1 to 12 do
+  begin
+    soma := soma + StrToInt(cnpj[i]) * peso;
+    peso := peso - 1;
+    if peso < 2 then
+      peso := 9;
+  end;
+  digito1 := 11 - (soma mod 11);
+  if digito1 >= 10 then
+    digito1 := 0;
+  soma := 0;
+  peso := 6;
+  for i := 1 to 12 do
+  begin
+    soma := soma + StrToInt(cnpj[i]) * peso;
+    peso := peso - 1;
+    if peso < 2 then
+      peso := 9;
+  end;
+  soma := soma + digito1 * 2;
+  digito2 := 11 - (soma mod 11);
+  if digito2 >= 10 then
+    digito2 := 0;
+  Result := cnpj + IntToStr(digito1) + IntToStr(digito2);
+end;
+
+
+class function TFaker.GenerateCPF: string;
+var
+  digito1, digito2: Integer;
+  i, soma: Integer;
+  cpf: string;
+begin
+  Randomize;
+  cpf := '';
+  for i := 1 to 9 do
+    cpf := cpf + IntToStr(Random(9));
+  soma := 0;
+  for i := 1 to 9 do
+    soma := soma + StrToInt(cpf[i]) * (11 - i);
+  digito1 := 11 - (soma mod 11);
+  if digito1 >= 10 then
+    digito1 := 0;
+  soma := 0;
+  for i := 1 to 9 do
+    soma := soma + StrToInt(cpf[i]) * (12 - i);
+  soma := soma + digito1 * 2;
+  digito2 := 11 - (soma mod 11);
+  if digito2 >= 10 then
+    digito2 := 0;
+  Result := cpf + IntToStr(digito1) + IntToStr(digito2);
+end;
+
 
 class function TFaker.GenerateUUID: String;
 const
@@ -1031,14 +1152,12 @@ end;
 
 class function TFaker.IbgeCodeCity: String;
 begin
-  Randomize;
-  Result := _IBGE_CODE_CITY[Random(Length(_IBGE_CODE_CITY))];
+  Result := RandVal(_IBGE_CODE_CITY);
 end;
 
 class function TFaker.IbgeCodeCountry: String;
 begin
-  Randomize;
-  Result := _IBGE_CODE_COUNTRY[Random(Length(_IBGE_CODE_COUNTRY))];
+  Result := RandVal(_IBGE_CODE_COUNTRY);
 end;
 
 class function TFaker.LoremIpsum(ASize: Integer = 0): String;
@@ -1057,8 +1176,7 @@ end;
 
 class function TFaker.MaleName: String;
 begin
-  Randomize;
-  Result := _MALE_NAME[Random(Length(_MALE_NAME))];
+  Result := RandVal(_MALE_NAME);
 end;
 
 class function TFaker.PersonName: String;
@@ -1072,20 +1190,24 @@ end;
 
 class function TFaker.Product: String;
 begin
+  Result := RandVal(_PRODUCT);
+end;
+
+class function TFaker.RandVal(AArray: array of String): string;
+begin
   Randomize;
-  Result := _PRODUCT[Random(Length(_PRODUCT))];
+  while Result.Trim.IsEmpty do
+    Result := AArray[Random(Length(aArray))];
 end;
 
 class function TFaker.Size: String;
 begin
-  Randomize;
-  Result := _SIZE[Random(Length(_SIZE))];
+  Result := RandVal(_SIZE);
 end;
 
 class function TFaker.State: String;
 begin
-  Randomize;
-  Result := _STATE[Random(Length(_STATE))];
+  Result := RandVal(_STATE);
 end;
 
 end.
