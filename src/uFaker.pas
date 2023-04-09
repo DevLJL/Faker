@@ -6,6 +6,7 @@ type
   TFaker = class
   private
   public
+    class function CostCenter: String;
     class function Category: String;
     class function Product: String;
     class function MaleName: String;
@@ -16,6 +17,55 @@ type
   end;
 
 const
+  _COST_CENTER: TArray<String> = [
+    'ADM - Administração',
+    'ALM - Almoxarifado',
+    'COM - Compras',
+    'COP - Contas a pagar',
+    'COR - Contas a receber',
+    'COU - Cobrança',
+    'DEV - Desenvolvimento',
+    'FIN - Financeiro',
+    'FIS - Fiscal',
+    'GER - Gerência',
+    'INF - Infraestrutura',
+    'JUR - Jurídico',
+    'LIM - Limpeza',
+    'LOG - Logística',
+    'MAN - Manutenção',
+    'MAR - Marketing',
+    'MKT - Merchandising',
+    'OPC - Operações comerciais',
+    'OPF - Operações financeiras',
+    'PAG - Pagamento de pessoal',
+    'PAS - Passivos',
+    'PAT - Patrimônio',
+    'PCO - Processos comerciais',
+    'PCP - Planejamento e controle da produção',
+    'PDT - Produção',
+    'PLA - Planejamento',
+    'PRD - Produção',
+    'PRV - Provisões',
+    'RCP - Recebimentos de pessoal',
+    'RCP - Receitas',
+    'REC - Recursos humanos',
+    'REF - Refeitório',
+    'SEG - Segurança',
+    'SEM - Seminários',
+    'SER - Serviços',
+    'SUS - Suspensos',
+    'TRE - Treinamentos',
+    'VDA - Vendas a prazo',
+    'VDS - Vendas à vista',
+    'VEN - Vendas',
+    'VID - Videoteca',
+    'VIN - Vistoria',
+    'VIS - Visitas',
+    'VIT - Viticultura',
+    'VMP - Vales-transporte',
+    'VOO - Viagens'
+  ];
+
   _CATEGORY: TArray<String> = [
     'Acampamento',
     'Artesanato',
@@ -488,6 +538,11 @@ end;
 class function TFaker.Category: String;
 begin
   Result := _CATEGORY[Random(High(_CATEGORY))];
+end;
+
+class function TFaker.CostCenter: String;
+begin
+  Result := _COST_CENTER[Random(High(_COST_CENTER))];
 end;
 
 class function TFaker.FemaleName: String;
