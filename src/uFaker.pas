@@ -960,10 +960,19 @@ begin
 end;
 
 class function TFaker.RandVal(AArray: array of String): string;
+var
+  lPos: Integer;
 begin
-  Randomize;
   while Result.Trim.IsEmpty do
-    Result := AArray[Random(Length(aArray))];
+  begin
+    lPos := 0;
+    while (lPos <= 0) do
+    begin
+      Randomize;
+      lPos := Random(Length(aArray));
+    end;
+    Result := AArray[lPos];
+  end;
 end;
 
 class function TFaker.Size: String;
