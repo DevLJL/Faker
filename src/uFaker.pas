@@ -10,6 +10,7 @@ type
     class function GenerateCPF: string;
     class function IbgeCodeCity: String;
     class function Country: String;
+    class function StateAbbreviation: String;
     class function State: String;
     class function City: String;
     class function &Unit: String;
@@ -189,6 +190,36 @@ const
     'São Paulo',
     'Sergipe',
     'Tocantins'
+  ];
+
+  _STATE_ABBREVIATION: TArray<String> = [
+    'AC',
+    'AL',
+    'AP',
+    'AM',
+    'BA',
+    'CE',
+    'DF',
+    'ES',
+    'GO',
+    'MA',
+    'MT',
+    'MS',
+    'MG',
+    'PA',
+    'PB',
+    'PR',
+    'PE',
+    'PI',
+    'RJ',
+    'RN',
+    'RS',
+    'RO',
+    'RR',
+    'SC',
+    'SP',
+    'SE',
+    'TO'
   ];
 
   _CITY: TArray<String> = [
@@ -983,6 +1014,11 @@ end;
 class function TFaker.State: String;
 begin
   Result := RandVal(_STATE);
+end;
+
+class function TFaker.StateAbbreviation: String;
+begin
+  Result := RandVal(_STATE_ABBREVIATION);
 end;
 
 end.
