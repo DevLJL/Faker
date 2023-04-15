@@ -5,6 +5,8 @@ interface
 type
   TFaker = class
   public
+    class function NumberFloat(ABase: Integer = 10): Double;
+    class function NumberStr(ASize: Integer = 1): String;
     class function Email: String;
     class function GenerateCNPJ: string;
     class function GenerateCPF: string;
@@ -974,6 +976,21 @@ end;
 class function TFaker.MaleName: String;
 begin
   Result := RandVal(_MALE_NAME);
+end;
+
+class function TFaker.NumberFloat(ABase: Integer): Double;
+begin
+  Randomize;
+  Result := ((Random(ABase)+2)*2)/2;
+end;
+
+class function TFaker.NumberStr(ASize: Integer): String;
+var
+  lI: Integer;
+begin
+  Result := EmptyStr;
+  for lI := 0 to Pred(ASize) do
+    Result := Result + Random(9).ToString;
 end;
 
 class function TFaker.PersonName: String;
