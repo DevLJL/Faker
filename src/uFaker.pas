@@ -958,7 +958,7 @@ var
   lI: Integer;
 begin
   Result := TGUID.NewGuid.ToString;
-  for lI := 0 to Length(L_CHARS_TO_REMOVE) do
+  for lI := 0 to Pred(Length(L_CHARS_TO_REMOVE)) do
     Result := StringReplace(Result, L_CHARS_TO_REMOVE[lI], '', [rfReplaceAll]);
 end;
 
@@ -1032,7 +1032,10 @@ class function TFaker.RandVal(AArray: array of String): string;
 var
   lIndex: Integer;
 begin
-  lIndex := Random(Length(aArray));
+  lIndex := 0;
+  while (lIndex <= 0) do
+    lIndex := Random(Length(aArray));
+
   Result := AArray[lIndex];
 end;
 
