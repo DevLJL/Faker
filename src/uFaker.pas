@@ -25,11 +25,19 @@ type
     class function FemaleName: String;
     class function PersonName: String;
     class function LoremIpsum(ASize: Integer = 0): String;
+    class function Text(ASize: Integer = 0): String;
     class function Brand: String;
     class function RandVal(AArray: array of String): string;
   end;
 
 const
+  _ALPHABET: TArray<String> = [
+    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s',
+    't','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L',
+    'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4',
+    '5','6','7','8','9'
+  ];
+
   _EMAIL: TArray<String> = [
     'maria@gmail.com',
     'joao@hotmail.com',
@@ -959,6 +967,19 @@ begin
   Result := RandVal(_IBGE_CODE_CITY);
 end;
 
+class function TFaker.Text(ASize: Integer = 0): String;
+var
+  i: Integer;
+begin
+  Result := '';
+
+  if ASize = 0 then
+    ASize := 60;
+
+  for i := 1 to ASize do
+    Result := Result + RandVal(_ALPHABET);
+end;
+
 class function TFaker.LoremIpsum(ASize: Integer = 0): String;
 begin
   Result := _LOREM_IPSUM;
@@ -1009,18 +1030,10 @@ end;
 
 class function TFaker.RandVal(AArray: array of String): string;
 var
-  lPos: Integer;
+  lIndex: Integer;
 begin
-  while Result.Trim.IsEmpty do
-  begin
-    lPos := 0;
-    while (lPos <= 0) do
-    begin
-      Randomize;
-      lPos := Random(Length(aArray));
-    end;
-    Result := AArray[lPos];
-  end;
+  lIndex := Random(Length(aArray));
+  Result := AArray[lIndex];
 end;
 
 class function TFaker.Size: String;
